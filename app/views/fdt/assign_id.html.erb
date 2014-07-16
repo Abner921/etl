@@ -1,0 +1,13 @@
+<h4>指定房多多楼盘ID</h4>
+<form enctype="multipart/form-data" method="POST" action="/fdt/assign_id">
+<%= @loupan.name %><br>
+<input type="input" maxlength="256" value="<%= @loupan.fdd_house_id if @loupan.fdd_house_id != 0 %>" name="fdd_house_id" size="60"><br>
+<input type="hidden" value="<%= @loupan.id %>" name="id">
+<input type="submit" value="上传" class="btn btn-primary">
+</form>
+<a href="/fdt">返回</a>
+<style>
+input {
+	margin: 4px 0;
+}
+</style>

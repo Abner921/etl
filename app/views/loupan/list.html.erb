@@ -1,0 +1,6 @@
+<h3>当前楼盘</h3>
+<% for loupan in @loupans %>
+<%= loupan.name %> <a href="/loupan/delete/<%= loupan.id %>">删除</a><br>
+<br>
+<% end %>
+<a href="/loupan/add">新增楼盘</a><br>

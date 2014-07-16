@@ -1,0 +1,31 @@
+<h3>今日爬取数据，每天中午十二点爬取当天数据</h3>
+<% if !@fetches.nil? %>
+<% for fetch in @fetches %>
+<% if fetch.status == 0 %>
+<a href="/result/<%= Date.today().strftime("%F")%>/<%= fetch.source %>.csv"><%= fetch.source %></a><br>
+<% else %>
+<%= fetch.source %> failed<br>
+<% end %>
+<% end %>
+<% end %>
+<br>
+<a href="/misc/fetch">下载历史数据</a><br>
+<h3>导入网站数据</h3>
+<form enctype="multipart/form-data" method="POST" action="/import/new_web">
+<input type="file" maxlength="256" value="" name="web_csv_file" size="60" id="web_csv_file">
+<input type="submit" value="上传">
+</form>
+<h3>当前共输出 <a href="/loupan/list"><%= @loupans.size %></a> 个楼盘</h3>
+<h3>生成数据</h3>
+<form enctype="multipart/form-data" method="POST" action="/export/download">
+<input type="submit" value="生成数据">
+</form>
+<% if !@files.nil? %>
+<% for file in @files %>
+<a href="/<%= file %>"><%= file %></a><br>
+<% end %>
+<% end %>
+<h3>导入今日数据</h3>
+<form enctype="multipart/form-data" method="POST" action="/export/upload">
+<input type="submit" value="导入今日数据">
+</form>

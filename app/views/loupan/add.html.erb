@@ -1,0 +1,5 @@
+<h3>请选择楼盘</h3>
+<% for loupan in @loupans %>
+<%= loupan.name %> <a href="/loupan/add_output/<%= loupan.id %>">增加</a><br>
+<br>
+<% end %>

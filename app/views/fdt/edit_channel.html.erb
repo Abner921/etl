@@ -1,0 +1,13 @@
+<h4>编辑渠道</h4>
+<form enctype="multipart/form-data" method="POST" action="/fdt/edit_channel">
+渠道代码：<input type="input" maxlength="256" value="<%= @channel.channel_code if !@channel.nil? %>" name="channel_code" size="60"><br>
+渠道名称：<input type="input" maxlength="256" value="<%= @channel.channel_name if !@channel.nil? %>" name="channel_name" size="60"><br>
+<input type="hidden" value="<%= @channel.id if !@channel.nil? %>" name="id">
+<input type="submit" value="确定" class="btn btn-primary">
+</form>
+<a href="/fdt">返回</a>
+<style>
+input {
+	margin: 4px 0;
+}
+</style>

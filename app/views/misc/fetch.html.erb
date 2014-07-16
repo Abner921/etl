@@ -1,0 +1,10 @@
+<% if !@fetches.nil? %>
+<% for fetch in @fetches %>
+<%= fetch.created_at.strftime("%F") %> 
+<% if fetch.status == 0 %>
+<a href="/result/<%= fetch.created_at.strftime("%F")%>/<%= fetch.source %>.csv"><%= fetch.source %></a><br>
+<% else %>
+<%= fetch.source %> failed<br>
+<% end %>
+<% end %>
+<% end %>

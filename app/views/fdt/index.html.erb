@@ -1,0 +1,72 @@
+<h4><%= @date.strftime("%F") %>自动爬取结果</h4>
+
+<% if !@tchannels.nil? %>
+<table class="table" style="width:400px;">
+<% for tchannel in @tchannels %>
+<tr>
+<% ft = @fetches.select {|v| v.source == tchannel.channel_code } %>
+<% if ft.size > 0 %>
+	<% c = ft[0] %>
+	<% if c.status.to_i == 0 %>
+	<td><%= tchannel.channel_name %></td><td><a href="/result/<%= Date.today().strftime("%F")%>/<%= c.source %>.csv" class="btn btn-success">成功</a></td>
+	<% elsif c.status == 10 %>
+	<td><%= tchannel.channel_name %></td><td><a href="#" class="btn btn-success">手工上传成功</a></td>
+	<% else %>
+<td><%= tchannel.channel_name %></td><td><a href="/fdt/add_csv?source=<%= tchannel.channel_code %>&created_at=<%= c.created_at %>" class="btn btn-warning">取得失败，手工上传</a></td>
+	<% end %>
+<% else %>
+<td><%= tchannel.channel_name %></td><td><a href="/fdt/add_csv?source=<%= tchannel.channel_code %>&created_at=<%= @date %>" class="btn btn-warning">尚未取得，手工上传</a></td>
+<% end %>
+</tr>
+<% end %>
+</table>
+<% end %>
+<a href="/fdt/channels">管理渠道</a>
+<div>
+<h4>包含楼盘</h4>
+<% if !@loupans.nil? %>
+<table class="table" style="width:400px;">
+<tr><th>楼盘名</th><th>房多多楼盘ID</th></tr>
+<% for loupan in @loupans %>
+<tr>
+<td><%= loupan.name %></td>
+<% if loupan.fdd_house_id.to_i == 0 %>
+<td><a href="/fdt/assign_id/<%= loupan.id %>">指定房多多楼盘 ID</a></td>
+<% else %>
+<td><a href="/fdt/assign_id/<%= loupan.id %>"><%= loupan.fdd_house_id %></a></td>
+<% end %>
+</tr>
+<% end %>
+</table>
+<% end %>
+选择日期：
+<input type="text" class="span2" style="margin-bottom: 0;" value="<%= @date.strftime("%Y-%m-%d") %>" id="dp" >
+<input type="submit" value="确定" class="btn btn-primary" id="submit_date">
+</div>
+<div style="padding-top:20px;">
+<form enctype="multipart/form-data" method="POST" action="/fdt/upload" id="upload_form">
+<input type="hidden" id="udate" name="udate">
+<% if @uploadable %>
+<input type="submit" value="导入房点通数据库" class="btn btn-primary" id="date_upload">
+<% else %>
+<input value="请先指定房多多楼盘ID" class="btn btn-warning">
+<% end %>
+</form>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$('#dp').datepicker({
+		format: 'yyyy-mm-dd',
+	  todayBtn: 'linked'
+	});
+ $("#submit_date").click( function() {
+		location.href="/fdt?date=" + $("#dp").val();
+ });
+ $("#date_upload").click( function() {
+		$("#udate").val($("#dp").val());
+		$("#upload_form").submit();
+ });
+})
+ 
+</script>

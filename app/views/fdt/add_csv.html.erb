@@ -1,0 +1,8 @@
+<h4>上传 <%= @created_at %> <%= params[:source] %> 的数据</h4>
+<form enctype="multipart/form-data" method="POST" action="/fdt/add_csv">
+<input type="file" maxlength="256" value="" name="web_csv_file" size="60" id="web_csv_file">
+<input type="submit" value="上传" class="btn btn-primary">
+<input type="hidden" value="<%= @created_at %>" name="created_at">
+<input type="hidden" value="<%= @source %>" name="source">
+</form>
+<a href="/fdt">返回</a>

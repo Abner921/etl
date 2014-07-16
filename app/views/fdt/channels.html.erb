@@ -1,0 +1,12 @@
+<h4>管理渠道</h4>
+<% if !@tchannels.nil? %>
+<table class="table" style="width:400px;">
+<% for tchannel in @tchannels %>
+<tr>
+<td><a href="/fdt/edit_channel/<%= tchannel.id %>"><%= tchannel.channel_code %></a></td><td><%= tchannel.channel_name %></td><td><a href="/fdt/del_channel/<%= tchannel.id %>">删除</a></td>
+</tr>
+<% end %>
+</table>
+<% end %>
+<a href="/fdt/add_channel">新建渠道</a>
+<a href="/fdt">返回</a>
