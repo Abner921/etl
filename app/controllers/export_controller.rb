@@ -116,7 +116,7 @@ class ExportController < ApplicationController
 					impression_count = (!sem_result[riqi].nil? and sem_result[riqi].size > 0) ? sem_result[riqi][0].impression_count : 0
 					
 					click_count = (!sem_result[riqi].nil? and sem_result[riqi].size > 0) ? sem_result[riqi][0].click_count : 0
-					cost = (!sem_result[riqi].nil? and sem_result[riqi].size > 0) ? sem_result[riqi][0].cost * 5 : 0
+					cost = (!sem_result[riqi].nil? and sem_result[riqi].size > 0) ? sem_result[riqi][0].cost : 0
 					
 					if c_index == 0
 			      sheet1[4 + index, channel[2] + 0 + c_index * 2] = riqi_str 

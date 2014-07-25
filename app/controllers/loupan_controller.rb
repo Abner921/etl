@@ -3,7 +3,7 @@ class LoupanController < ApplicationController
   	loupan = Loupan.find(params[:id])
   	loupan.output_needed = 0
   	loupan.save
-  	redirect_to :controller => "misc", :action => "index"
+  	redirect_to :host => "211.144.118.125:9301", :controller => "misc", :action => "index"
   end
   
   def add

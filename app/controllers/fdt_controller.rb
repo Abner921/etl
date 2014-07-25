@@ -20,13 +20,14 @@ class FdtController < ApplicationController
 		fh = FetchHistory.find_or_create_by_source_and_created_at(@source, @created_at)
 		fh.status = 10
 		fh.save
-	  redirect_to :controller => 'fdt', :action => "index", :date => @created_at
+	  redirect_to :host => "211.144.118.125:9301", :controller => 'fdt', :action => "index", :date => @created_at
 	end
 	
 	def upload
+		flash[:notice] = "done"
   	date = Date.parse(params[:udate])
   	WebHistory.upload_to_db(date)
-	  redirect_to '/fdt'
+	  redirect_to :host => "211.144.118.125:9301", :controller => 'fdt', :action => "index"
 	end
 	
   def assign_id
@@ -46,7 +47,7 @@ class FdtController < ApplicationController
 		c = TChannel.find(params[:id])
 		c.status = 0
 		c.save
-		redirect_to :controller => 'fdt', :action => "channels"
+		redirect_to :host => "211.144.118.125:9301", :controller => 'fdt', :action => "channels"
 	end
 	
 	def add_channel
@@ -64,6 +65,6 @@ class FdtController < ApplicationController
   	@channel.channel_name = params[:channel_name]
   	@channel.status = 1
   	@channel.save
-		redirect_to :controller => 'fdt', :action => "channels"
+		redirect_to :host => "211.144.118.125:9301", :controller => 'fdt', :action => "channels"
 	end
 end

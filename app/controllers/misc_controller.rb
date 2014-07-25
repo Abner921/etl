@@ -7,4 +7,13 @@ class MiscController < ApplicationController
   def fetch
   	@fetches = FetchHistory.limit(100).order("created_at DESC")
 	end
+	
+	def upload
+		filepath = "/home/fengkan/hades/upload/upload/#{params[:file].original_filename}"
+
+  	FileUtils.cp params[:file].path, filepath
+		FileUtils.chmod 0755, filepath
+
+  	render :nothing => true
+	end
 end

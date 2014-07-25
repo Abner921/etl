@@ -86,10 +86,10 @@ class WebHistory < ActiveRecord::Base
 			loupan_ids = Loupan.find_all_by_fdd_house_id(house_id).collect{|x| x.id}
 			
 			for channel in channels
-				sem = WebHistory.find_by_sql(["SELECT riqi, SUM(cost) AS cost, SUM(impression_count) AS impression_count, SUM(click_count) AS click_count FROM `web_histories` WHERE `channel_id` IN (#{channel["channel_ids"]}) AND `loupan_id` IN (#{loupan_ids.join(', ')}) AND riqi BETWEEN ? AND ? GROUP BY loupan_id", date - 1, date])
+				sem = WebHistory.find_by_sql(["SELECT riqi, SUM(cost) AS cost, SUM(impression_count) AS impression_count, SUM(click_count) AS click_count FROM `web_histories` WHERE `channel_id` IN (#{channel["channel_ids"]}) AND `loupan_id` IN (#{loupan_ids.join(', ')}) AND riqi BETWEEN ? AND ?", date - 1, date])
 
-				if !house_id.nil? and sem.size > 0
-					cost = sem[0].cost * 5
+				if !house_id.nil? and sem.size > 0 and !sem[0].riqi.nil?
+					cost = sem[0].cost
 					impression_count = sem[0].impression_count
 					click_count = sem[0].click_count
 					

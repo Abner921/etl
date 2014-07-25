@@ -7,6 +7,6 @@ class ImportController < ApplicationController
   	count, created, updated = WebHistory.import_from_csv(params[:web_csv_file].path)
 
 		flash[:notice] = "done, #{count} lines imported, #{created} lines created, #{updated} lines updated"
-	  redirect_to '/misc/index'
+	  redirect_to '211.144.118.125:9301/misc/index'
   end
 end
