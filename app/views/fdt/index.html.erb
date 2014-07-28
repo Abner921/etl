@@ -8,7 +8,7 @@
 <% if ft.size > 0 %>
 	<% c = ft[0] %>
 	<% if c.status.to_i == 0 %>
-	<td><%= tchannel.channel_name %></td><td><a href="/result/<%= Date.today().strftime("%F")%>/<%= c.source %>.csv" class="btn btn-success">成功</a></td>
+	<td><%= tchannel.channel_name %></td><td><a href="/result/<%= @date.strftime("%F")%>/<%= c.source %>.csv" class="btn btn-success">成功</a></td>
 	<% elsif c.status == 10 %>
 	<td><%= tchannel.channel_name %></td><td><a href="#" class="btn btn-success">手工上传成功</a></td>
 	<% else %>
