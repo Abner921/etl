@@ -164,7 +164,8 @@ class ExportController < ApplicationController
 
   	@loupans = Loupan.where(:output_needed => 1)
 		flash[:notice] = 'done'
-	  render '/misc/index'
+		flash[:files] = @files
+	  redirect_to :host => "211.144.118.125:9301", :controller => 'fdt', :action => "loupan"
   end
   
   def upload

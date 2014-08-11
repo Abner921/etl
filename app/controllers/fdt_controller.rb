@@ -67,4 +67,9 @@ class FdtController < ApplicationController
   	@channel.save
 		redirect_to :host => "211.144.118.125:9301", :controller => 'fdt', :action => "channels"
 	end
+	
+	def loupan
+  	@loupans = Loupan.where(:output_needed => 1)
+		
+	end
 end

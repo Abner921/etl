@@ -22,12 +22,13 @@ Etl::Application.routes.draw do
   resources :misc do
 	  collection do
       get :fetch
+      post :upload
 	  end 
 	end
 	
 	resources :fdt do
 	  collection do
-      get :index, :add_csv, :assign_id, :channels, :del_channel, :edit_channel, :add_channel
+      get :index, :add_csv, :assign_id, :channels, :del_channel, :edit_channel, :add_channel, :loupan
       post :add_csv, :upload, :assign_id, :edit_channel
 	  end 
 	end

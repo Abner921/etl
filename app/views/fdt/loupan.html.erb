@@ -1,0 +1,10 @@
+<h3>当前共输出 <a href="/loupan/list"><%= @loupans.size %></a> 个楼盘</h3>
+<form enctype="multipart/form-data" method="POST" action="/export/download">
+<input type="submit" value="生成 excel" class="btn btn-primary">
+</form>
+<% if !flash[:files].nil? %>
+<% for file in flash[:files] %>
+<a href="/<%= file %>"><%= file %></a><br>
+<% end %>
+<% end %>
+<a href="/fdt">返回</a>
