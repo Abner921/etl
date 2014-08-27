@@ -14,6 +14,7 @@ class FdtController < ApplicationController
   	@created_at = Date.parse(params[:created_at])
   	@source = params[:source]
   	return if !request.post?
+  	FileUtils.cp params[:web_csv_file].path, "./public/upload/#{Time.now.strftime('%Y%m%d%H%M%S')}.csv"
   	count, created, updated = WebHistory.import_from_csv(params[:web_csv_file].path)
 		flash[:notice] = "done, #{count} lines imported, #{created} lines created, #{updated} lines updated"
 		
